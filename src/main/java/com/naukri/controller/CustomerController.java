@@ -7,10 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.Serializable;
+import java.util.List;
 
 public interface CustomerController extends Serializable {
 
     ResponseEntity<CreateCustomerResponse> create(@RequestBody CreateCustomerRequest request);
 
-    public ResponseEntity<GetAllCustomerRecord> getAllCustomer();
+    ResponseEntity<List<GetAllCustomerRecord>> getAllCustomer();
 }

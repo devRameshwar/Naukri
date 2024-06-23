@@ -1,6 +1,7 @@
 package com.naukri.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,14 +9,15 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "customer")
 
 public class Customer {
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String customer_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer customer_id;
     @Column
     private String first_name;
     @Column

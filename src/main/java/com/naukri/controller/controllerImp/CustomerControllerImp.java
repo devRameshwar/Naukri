@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "/api/customer")
 public class CustomerControllerImp implements CustomerController {
@@ -27,8 +29,7 @@ public class CustomerControllerImp implements CustomerController {
     }
 
     @GetMapping
-    public ResponseEntity<GetAllCustomerRecord> getAllCustomer(){
-
-        return null;
+    public ResponseEntity<List<GetAllCustomerRecord>>getAllCustomer(){
+        return ResponseEntity.ok(service.getAllCustomer());
     }
 }
