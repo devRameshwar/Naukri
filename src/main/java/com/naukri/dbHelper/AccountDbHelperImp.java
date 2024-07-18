@@ -20,8 +20,8 @@ public class AccountDbHelperImp implements AccountDbHelper{
 
     @Override
     public Optional<Customer> findByEmail(String email) {
-        logger.info("Account db helper data: "+email);
-        return repository.findByEmail(email);
+        logger.info("***********Account db helper data: "+email);
+        return repository.findCustomerByEmail(email);
     }
 
     @Override
@@ -32,5 +32,10 @@ public class AccountDbHelperImp implements AccountDbHelper{
     @Override
     public Optional<List<Customer>> getAllCustomer() {
         return repository.findAllCustomer();
+    }
+
+    @Override
+    public Optional<Customer> findByCostomerid(String customerId) {
+        return repository.findByCustomerId(customerId);
     }
 }

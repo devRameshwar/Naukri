@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class GetAllCustomerRecord {
+public class GetCustomerRecord {
 
     private String first_name;
     private String last_name;

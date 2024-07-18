@@ -14,4 +14,5 @@ public interface AccountDbHelper {
 
     Optional<List<Customer>> getAllCustomer() ;
 
+    Optional<Customer> findByCostomerid(String customerId);
 }

@@ -3,7 +3,7 @@ package com.naukri.mapper;
 import com.naukri.model.Customer;
 import com.naukri.request.CreateCustomerRequest;
 import com.naukri.responce.CreateCustomerResponse;
-import com.naukri.responce.GetAllCustomerRecord;
+import com.naukri.responce.GetCustomerRecord;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +27,15 @@ public class CustomerMapper {
         return Optional.ofNullable(modelMapper.map(saved, CreateCustomerResponse.class));
     }
 
-    public Optional<List<GetAllCustomerRecord>> entityGetAllCustomer(List<Customer> customers) {
+    public Optional<List<GetCustomerRecord>> entityGetAllCustomer(List<Customer> customers) {
 
-        List<GetAllCustomerRecord> customerRecords = modelMapper.
-                map(customers, new TypeToken<List<GetAllCustomerRecord>>() {}.getType());
+        List<GetCustomerRecord> customerRecords = modelMapper.
+                map(customers, new TypeToken<List<GetCustomerRecord>>() {}.getType());
         return Optional.of(customerRecords);
+    }
+
+
+    public Optional<GetCustomerRecord> entityToResponceById(Customer customer) {
+        return Optional.ofNullable(modelMapper.map(customer, GetCustomerRecord.class));
     }
 }

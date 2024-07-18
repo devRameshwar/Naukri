@@ -17,4 +17,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String > somethingWentWrong(SomethingWentWrongException exception){
         return new ResponseEntity<>(exception.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<String>userNotFoundException(UserNotFoundException e){
+        return new ResponseEntity<>(e.getMassage(),HttpStatus.NOT_FOUND);
+    }
 }
