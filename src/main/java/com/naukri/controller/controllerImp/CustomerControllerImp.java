@@ -15,32 +15,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/customer")
 public class CustomerControllerImp implements CustomerController {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(CustomerControllerImp.class);
     @Autowired
     private CustomerService service;
-   private final Logger LOGGER= LoggerFactory.getLogger(CustomerControllerImp.class);
-
 
     @Override
     @PostMapping
-    public ResponseEntity<CreateCustomerResponse> create(@RequestBody CreateCustomerRequest request){
-        LOGGER.info("*********request: "+request);
+    public ResponseEntity<CreateCustomerResponse> create(@RequestBody CreateCustomerRequest request) {
+        LOGGER.info("*********request: " + request);
         return ResponseEntity.ok(service.create(request));
     }
 
     @Override
-    @GetMapping
-    public ResponseEntity<List<GetCustomerRecord>>getAllCustomer(){
+    @GetMapping(path = "/all-data")
+    public ResponseEntity<List<GetCustomerRecord>> getAllCustomer() {
         return ResponseEntity.ok(service.getAllCustomer());
     }
 
     //get user by CustomerId
     @Override
     @GetMapping(path = "/customerId/{customerId}")
-    public ResponseEntity<GetCustomerRecord> getCustomerRecordById(@PathVariable String customerId ){
-        LOGGER.info("*********** Customer id: "+customerId);
+    public ResponseEntity<GetCustomerRecord> getCustomerRecordById(@PathVariable String customerId) {
+        LOGGER.info("*********** Customer id: " + customerId);
         return new ResponseEntity<>(service.getCustomerById(customerId), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/details")
+    public ResponseEntity<GetCustomerRecord> getDataByIdOrName(@RequestParam(required = false) String email, @RequestParam(required = false) String mobileNumber) {
+        LOGGER.info("******** Data in urls: " + email + "\t" + mobileNumber);
+
+        return ResponseEntity.ok(new GetCustomerRecord());
     }
 }

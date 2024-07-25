@@ -1,9 +1,6 @@
 package com.naukri.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -12,6 +9,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 public class CreateCustomerRequest implements Serializable {
+
 
     private String first_name;
     private String last_name;
