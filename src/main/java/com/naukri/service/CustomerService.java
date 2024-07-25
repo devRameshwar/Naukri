@@ -13,4 +13,10 @@ public interface CustomerService {
     List<GetCustomerRecord> getAllCustomer();
 
     GetCustomerRecord getCustomerById(String customerId);
+
+    GetCustomerRecord findByEmail(String email);
+
+    GetCustomerRecord findByMobileNumber(String mobileNumber);
+
+    GetCustomerRecord findByEmailOrMobileNumber(String email, String mobileNumber);
 }

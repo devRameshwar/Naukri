@@ -43,9 +43,15 @@ public class CustomerControllerImp implements CustomerController {
     }
 
     @GetMapping(path = "/details")
+    @RequestMapping(path = "/",method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseEntity<GetCustomerRecord> getDataByIdOrName(@RequestParam(required = false) String email, @RequestParam(required = false) String mobileNumber) {
         LOGGER.info("******** Data in urls: " + email + "\t" + mobileNumber);
-
-        return ResponseEntity.ok(new GetCustomerRecord());
+        //Writing searching logic for
+        return ResponseEntity.ok(email!=null & mobileNumber!=null?service.findByEmailOrMobileNumber(email,mobileNumber):mobileNumber!=null ?
+                service.findByMobileNumber(mobileNumber):service.findByEmail(email));
+    }
+    @RequestMapping(path = "/welcome",method = {RequestMethod.GET, RequestMethod.POST})
+    String getWelcome(){
+        return "welcome";
     }
 }

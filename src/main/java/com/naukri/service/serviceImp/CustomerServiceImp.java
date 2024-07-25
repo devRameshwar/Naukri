@@ -44,6 +44,24 @@ public class CustomerServiceImp implements CustomerService {
     }
 
     @Override
+    public GetCustomerRecord findByEmail(String email) {
+        LOGGER.info("****** getting data in service findByEmail: "+email);
+        return null;
+    }
+
+    @Override
+    public GetCustomerRecord findByMobileNumber(String mobileNumber) {
+        LOGGER.info("****** getting data in service findByMobileNumber: "+mobileNumber);
+        return null;
+    }
+
+    @Override
+    public GetCustomerRecord findByEmailOrMobileNumber(String email, String mobileNumber) {
+        LOGGER.info("****** getting data in service findByEmailOrMobileNumber: "+email+"\t"+mobileNumber);
+        return null;
+    }
+
+    @Override
     public GetCustomerRecord getCustomerById(String customerId) {
         Customer customer = dbHelper.findByCostomerid(customerId).orElseThrow(() -> new UserNotFoundException(ApplicationConstant.USER_NOT_FOUND));
         LOGGER.info("*********Getting Data By Id: " + customer);
