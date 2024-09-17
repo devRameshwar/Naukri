@@ -24,6 +24,11 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(DocumentsEmptyException.class)
+    public ResponseEntity<String> documentsEmptyException(DocumentsEmptyException exception){
+        return new ResponseEntity<>(exception.getMessage(),HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(UserAlreadyExists.class)
     public ResponseEntity<String> userAlreadyExists(UserAlreadyExists e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.ALREADY_REPORTED);
