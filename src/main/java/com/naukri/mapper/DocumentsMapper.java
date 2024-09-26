@@ -1,6 +1,7 @@
 package com.naukri.mapper;
 
 import com.naukri.model.Documents;
+import com.naukri.responce.GetAllMultipartFileClass;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class DocumentsMapper {
@@ -17,7 +19,7 @@ public class DocumentsMapper {
 
     @Transactional
     public List<Documents> setDataToEntity(MultipartFile[] multipartFile) {
-        
+
         ArrayList<Documents> documentList = new ArrayList<>();
 
         for (MultipartFile file : multipartFile) {
@@ -29,9 +31,13 @@ public class DocumentsMapper {
     }
 
     private Documents setEntity(MultipartFile multipartFile) {
-        Documents documents = Documents.builder().docName(multipartFile.getOriginalFilename())
-                .mimeType(multipartFile.getContentType()).size(multipartFile.getSize())
-                .hash(multipartFile.getName()).build();
+        Documents documents = Documents.builder().docName(multipartFile.getOriginalFilename()).mimeType(multipartFile.getContentType()).size(multipartFile.getSize()).hash(multipartFile.getName()).build();
         return documents;
     }
+
+    public List<GetAllMultipartFileClass> entityToGetAllMultipartClass(List<Documents> documents) {
+        return documents.stream().map(GetAllMultipartFileClass::new)
+                .collect(Collectors.toList());
+    }
+
 }

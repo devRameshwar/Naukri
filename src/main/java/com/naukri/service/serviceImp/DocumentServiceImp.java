@@ -6,6 +6,7 @@ import com.naukri.exception.DocumentsEmptyException;
 import com.naukri.exception.SomethingWentWrongException;
 import com.naukri.mapper.DocumentsMapper;
 import com.naukri.model.Documents;
+import com.naukri.responce.GetAllMultipartFileClass;
 import com.naukri.service.DocumentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,21 @@ public class DocumentServiceImp implements DocumentService {
     private DocumentDbHelper dbHelper;
 
     @Override
+    public List<GetAllMultipartFileClass> getDocuments() {
+        List<Documents> documents = dbHelper.getDucuments();
+        if (documents != null) {
+            List<GetAllMultipartFileClass> allMultipartFiles = mapper.entityToGetAllMultipartClass(documents);
+            if (allMultipartFiles != null) {
+                return allMultipartFiles;
+            } else {
+                throw new SomethingWentWrongException(ApplicationConstant.SOMETHING_WENT_WRONG);
+            }
+        } else {
+            throw new DocumentsEmptyException(ApplicationConstant.DOCUMENTS_IS_EMPTY);
+        }
+    }
+
+    @Override
     public String documentSave(MultipartFile[] multipartFile) {
         LOGGER.info("********* Document Service  Method called ");
         if (multipartFile.length == 0) {
@@ -33,13 +49,13 @@ public class DocumentServiceImp implements DocumentService {
             throw new DocumentsEmptyException(ApplicationConstant.DOCUMENTS_IS_EMPTY);
         } else {
             List<Documents> documents = mapper.setDataToEntity(multipartFile);
-            LOGGER.info("*******set data in Entity: "+documents);
+            LOGGER.info("*******set data in Entity: " + documents);
             if (documents == null) {
                 LOGGER.info("********set Data Entity is Empty");
                 throw new SomethingWentWrongException(ApplicationConstant.SOMETHING_WENT_WRONG);
             } else {
                 List<Documents> saveDocuments = dbHelper.saveDocuments(documents);
-                LOGGER.info("********Save data in database: "+saveDocuments);
+                LOGGER.info("********Save data in database: " + saveDocuments);
                 if (saveDocuments == null) {
                     LOGGER.info("******** Repository is not save data");
                     throw new SomethingWentWrongException(ApplicationConstant.SOMETHING_WENT_WRONG);

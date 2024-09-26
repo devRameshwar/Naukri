@@ -1,5 +1,6 @@
 package com.naukri.model;
 
+import com.naukri.responce.GetAllMultipartFileClass;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +18,7 @@ import java.util.Date;
 @Builder
 @Entity
 @Table(name = "customer-documents")
-public class Documents {
+public class Documents  {
 
     public static final Integer RADIX = 16;
 

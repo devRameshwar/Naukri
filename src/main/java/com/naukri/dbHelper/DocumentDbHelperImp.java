@@ -24,4 +24,11 @@ public class DocumentDbHelperImp implements DocumentDbHelper  {
         LOGGER.info("Repository save method called : "+documents);
         return repository.saveAll(documents);
     }
+
+    @Override
+    public List<Documents> getDucuments() {
+        LOGGER.info("repository getDocuments method called.");
+
+        return repository.findAll();
+    }
 }
