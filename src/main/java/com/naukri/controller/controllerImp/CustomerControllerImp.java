@@ -5,6 +5,7 @@ import com.naukri.request.CreateCustomerRequest;
 import com.naukri.responce.CreateCustomerResponse;
 import com.naukri.responce.GetCustomerRecord;
 import com.naukri.service.CustomerService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class CustomerControllerImp implements CustomerController {
 
     @Override
     @PostMapping
-    public ResponseEntity<CreateCustomerResponse> create(@RequestBody CreateCustomerRequest request) {
+    public ResponseEntity<CreateCustomerResponse> create( @RequestBody @Valid CreateCustomerRequest request) {
         LOGGER.info("*********request: " + request);
         return ResponseEntity.ok(service.create(request));
     }

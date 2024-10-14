@@ -32,8 +32,9 @@ public class CustomerServiceImp implements CustomerService {
     @Override
     public CreateCustomerResponse create(CreateCustomerRequest request) {
 
-
-        dbHelper.findByEmail(request.getEmail()).orElseThrow(() -> new UserAlreadyExists(ApplicationConstant.USER_ALREADY_EXITS));
+        if(dbHelper.findByEmail(request.getEmail()).isPresent()){
+            throw new UserAlreadyExists(ApplicationConstant.USER_ALREADY_EXITS);
+        }
 
         Customer customer = mapper.requestToEntity(request).orElseThrow(() -> new SomethingWentWrongException(SOMETHING_WENT_WRONG));
 
